@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import React from 'react';
+import { Container,Segment } from 'semantic-ui-react';
+import { useState } from 'react';
+import { useSpeechSynthesis } from 'react-speech-kit';
 function App() {
+  const [text,setText]=useState('');
+  const {speak}=useSpeechSynthesis();
+  const handleClick=()=>{
+    speak({text:text})
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <Segment>
+          <textarea className='textarea' onChange={(e)=>{setText(e.target.value)}}>
+
+
+          </textarea>
+          <button className='button' onClick={()=>{handleClick()}}>alert</button>
+        </Segment>
+      </Container>
     </div>
   );
 }
